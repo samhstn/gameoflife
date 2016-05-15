@@ -1,13 +1,13 @@
 {
-  "name": "3rdgameoflife",
+  "name": "gameoflife",
   "version": "1.0.0",
-  "description": "",
+  "description": "game of life with tests",
   "main": "index.js",
   "scripts": {
     "test": "nodemon test.js"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["game", "of", "life"],
+  "author": "shouston3",
   "license": "ISC",
   "devDependencies": {
     "tape": "^4.5.1"
