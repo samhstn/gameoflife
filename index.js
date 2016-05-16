@@ -20,11 +20,9 @@ const returnAllCellsToConsiderFromLiveCells = grid => {
   return grid.reduce((prev, curr) => {
     const x = parseInt(curr.split(',')[0]);
     const y = parseInt(curr.split(',')[1]);
-    const arr = [-1, 0, 1].map(ei => {
-      return [-1, 0, 1].map(ej => {
-        return (x + ej) + ',' + (y + ei);
-      });
-    }).reduce((prev, curr) => prev.concat(curr), []);
+    const arr = [-1, 0, 1].reduce((previ, curri) => {
+      return previ.concat([-1, 0, 1].reduce((prevj, currj) => prevj.concat((x + currj) + ',' + (y + curri)), []));
+    }, []);
     return prev.concat(arr)
   }, []);
 }
