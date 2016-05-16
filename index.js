@@ -20,11 +20,11 @@ const returnAllCellsToConsiderFromLiveCells = grid => {
   return grid.reduce((prev, curr) => {
     const x = parseInt(curr.split(',')[0]);
     const y = parseInt(curr.split(',')[1]);
-    const arr = [
-      (x - 1) + ',' + (y - 1), x + ',' + (y - 1), (x + 1) + ',' + (y - 1),
-      (x - 1) + ',' + y, x + ',' + y, (x + 1) + ',' + y,
-      (x - 1) + ',' + (y + 1), x + ',' + (y + 1), (x + 1) + ',' + (y + 1)
-    ];
+    const arr = [-1, 0, 1].map(ei => {
+      return [-1, 0, 1].map(ej => {
+        return (x + ej) + ',' + (y + ei);
+      });
+    }).reduce((prev, curr) => prev.concat(curr), []);
     return prev.concat(arr)
   }, []);
 }
@@ -51,16 +51,14 @@ const getNeighboursOfObjs = arr => arr.map(el => {
   const neighbours = arr.filter(e => {
     return Math.abs(e.coord.split(',')[0] - f) < 2 && Math.abs(e.coord.split(',')[1] - s) < 2
   }).reduce((prev, curr) => prev + curr.state, 0) - el.state;
-    const obj = {};
+  const obj = {};
   obj.coord = el.coord;
   obj.state = el.state;
   obj.neighbours = neighbours;
   return obj
 });
 
-const getNeighbours = grid => {
-  return getNeighboursOfObjs(cellsToConsiderWithState(grid));
-}
+const getNeighbours = grid => getNeighboursOfObjs(cellsToConsiderWithState(grid));
 
 const newGeneration = grid => {
   return getNeighbours(grid).map(el => {
