@@ -14,7 +14,8 @@ const newGeneration = require('./index.js').newGeneration;
 const placeCoordinates = require('./index.js').placeCoordinates;
 const gameoflife = require('./index.js').gameoflife;
 
-const compareFunc = (a, b) => a.coord < b.coord ? -1 : a.coord > b.coord ? 1 : 0
+// used in the .sort() method to sort an array of onjects by coordinate
+const compareFunc = (a, b) => a.coord < b.coord ? -1 : 1;
 
 tape('map live cells to coordinates', t => {
   const input1 = [
@@ -118,7 +119,7 @@ tape('returns an array of all cells to consider', t => {
     '4,2', '4,3', '4,4'
   ];
 
-  t.deepEqual(typeof actual1 === 'object' ? actual1.sort() : actua1l, expected1.sort(), 'input1 inputs coordinates correctly');
+  t.deepEqual(typeof actual1 === 'object' ? actual1.sort() : actual1, expected1.sort(), 'input1 inputs coordinates correctly');
   const input2 = ['0,0', '3,3'];
   const actual2 = returnAllCellsToConsiderFromLiveCells(input2);
   const expected2 = [
@@ -130,7 +131,7 @@ tape('returns an array of all cells to consider', t => {
     '4,2', '4,3', '4,4'
   ];
 
-  t.deepEqual(typeof actual2 === 'object' ? actual2.sort() : actua2l, expected2.sort(), 'input2 inputs coordinates correctly');
+  t.deepEqual(typeof actual2 === 'object' ? actual2.sort() : actual2, expected2.sort(), 'input2 inputs coordinates correctly');
   t.end();
 });
 
